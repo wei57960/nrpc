@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="log_dir" value="./logs/defined-server"/>
+    <property name="max_history" value="10"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger -%msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- INFO 级别日志文件 -->
+    <appender name="DEFINED-SERVER-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>   <!--过滤掉error的级别-->
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] --%mdc{client} %msg%n</Pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log_dir}/log.%d.log</fileNamePattern>
+            <MaxHistory>${max_history}</MaxHistory>
+        </rollingPolicy>
+    </appender>
+    <!-- ERROR 级别日志文件 -->
+    <appender name="DEFINED-SERVER-ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>  <!--//打印error-->
+        </filter>
+        <encoder>
+            <Pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] --%mdc{client} %msg%n</Pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${log_dir}/error.%d.log</fileNamePattern>
+            <MaxHistory>${max_history}</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEFINED-SERVER-FILE"/>
+        <appender-ref ref="DEFINED-SERVER-ERROR-FILE"/>
+    </root>
+</configuration>
