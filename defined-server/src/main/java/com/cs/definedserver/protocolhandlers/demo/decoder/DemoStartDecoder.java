@@ -75,7 +75,7 @@ public class DemoStartDecoder extends LengthFieldBasedFrameDecoder {
         // check 校验和
 
         // 校验成功 进行应答
-        ctx.channel().writeAndFlush(calculateReplayData(in));
+        ctx.channel().writeAndFlush(calculateReplayData(ctx, in));
 
 
         in.resetReaderIndex();
@@ -88,10 +88,12 @@ public class DemoStartDecoder extends LengthFieldBasedFrameDecoder {
      * @param data
      * @return
      */
-    private byte[] calculateReplayData(ByteBuf data) {
+    private ByteBuf calculateReplayData(ChannelHandlerContext ctx, ByteBuf data) {
+        ByteBuf byteBuf = ctx.alloc().buffer();
         byte[] replayData = "success".getBytes(CharsetUtil.UTF_8);
         log.debug("应答的数据为：[{}]", ByteUtil.getByteArrayString(replayData));
-        return replayData;
+        byteBuf.writeBytes(replayData);
+        return byteBuf;
     }
 
 }

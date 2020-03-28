@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DemoHandler extends SimpleChannelInboundHandler<DemoEntity> {
 
     /**
-     * 进行 kafka 传递消息
+     * 业务处理
      *
      * @param ctx
      * @param msg
