@@ -3,7 +3,7 @@ server:
 
 nrpc:
   protocols:
-    8030: demo # 8030 开启 demo 协议
-    8040: hzx # 8040 端口开启火正熊协议
-
-
+    # 8030 开启 demo 协议
+    8030: demo
+    # 8040 端口开启hxz协议
+    8040: hzx

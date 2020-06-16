@@ -41,7 +41,7 @@
         </rollingPolicy>
     </appender>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="DEFINED-SERVER-FILE"/>
         <appender-ref ref="DEFINED-SERVER-ERROR-FILE"/>

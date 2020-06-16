@@ -1,0 +1,6 @@
+server:
+  port: 9050
+
+# todo 添加默认值
+nrpc.zookeeper.host: 127.0.0.1
+nrpc.zookeeper.port: 2181
