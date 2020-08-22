@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.cs</groupId>
-    <artifactId>nrpc-server</artifactId>
+    <artifactId>nrpc-core</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>nrpc-core</name>
 
@@ -33,14 +33,5 @@
             <version>${reflections.version}</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

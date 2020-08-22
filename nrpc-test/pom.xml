@@ -7,36 +7,24 @@
         <artifactId>nrpc</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>com.cs</groupId>
-    <artifactId>nrpc-client</artifactId>
+    <artifactId>nrpc-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>nrpc-test</name>
     <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>nrpc-test-api</module>
+        <module>nrpc-test-consumer</module>
+        <module>nrpc-test-provider</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.cs</groupId>
-            <artifactId>nrpc-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.cs</groupId>
-            <artifactId>nrpc-server</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

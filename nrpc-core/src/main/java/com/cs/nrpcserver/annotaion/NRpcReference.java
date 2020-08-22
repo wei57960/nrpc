@@ -4,17 +4,18 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 /**
  * @Author wei
  * @Time 2020/8/12
- * @Description 服务提供
+ * @Description 服务调用
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NRpcProvider {
+public @interface NRpcReference {
 
-    Class<?> interfaceClass();
+    Class interfaceClass();
 
-    String version() default "";
+    String version() default "1.0.0";
 
 }

@@ -20,14 +20,12 @@
         <module>nrpc-common</module>
         <module>defined-server</module>
         <module>nrpc-core</module>
+        <module>nrpc-spring-boot-starter</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>${file_encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${file_encoding}</project.reporting.outputEncoding>
-        <netty_version>4.1.6.Final</netty_version>
-        <zookeeper_version>3.4.13</zookeeper_version>
-        <lombok_version>1.18.10</lombok_version>
         <file_encoding>UTF-8</file_encoding>
     </properties>
 
@@ -41,24 +39,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>${netty_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>${zookeeper_version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok_version}</version>
         </dependency>
-
     </dependencies>
 
 

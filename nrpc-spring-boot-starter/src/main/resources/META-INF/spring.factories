@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.cs.nrpc.starter.NrpcProviderAutoConfiguration,\
+  com.cs.nrpc.starter.NrpcConsumerAutoConfiguration,\
+  com.cs.nrpc.starter.NrpcRegistryAutoConfiguration
