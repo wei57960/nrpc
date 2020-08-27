@@ -40,7 +40,7 @@ public class NrpcProviderAutoConfiguration {
         NRpcServer nRpcServer = new NRpcServer(serverInfo, serviceRegistry);
         Thread thread = new Thread(() -> {
             try {
-                nRpcServer.start();
+                nRpcServer.start(nrpcProperties.getBasePackage());
             } catch (InterruptedException e) {
                 log.error("nrpc-server-starter start error [{}]", e.getMessage());
                 // 用来结束当前正在运行中的java虚拟机。System.exit(0)是正常退出程序，而System.exit(1)或者说非0表示非正常退出程序。

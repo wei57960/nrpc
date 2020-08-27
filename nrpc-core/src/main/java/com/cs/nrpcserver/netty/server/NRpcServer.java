@@ -1,7 +1,7 @@
 package com.cs.nrpcserver.netty.server;
 
 
-import com.cs.common.util.ServiceNameUtil;
+import com.cs.common.util.NRpcServiceUtil;
 import com.cs.common.zk.ServerInfo;
 import com.cs.common.zk.ServiceRegistry;
 import com.cs.nrpcserver.annotaion.NRpcProvider;
@@ -31,8 +31,7 @@ public class NRpcServer {
     private NioEventLoopGroup bossEventLoopGroup = new NioEventLoopGroup();
     private NioEventLoopGroup workerEventLoopGroup = new NioEventLoopGroup();
     private ServerBootstrap serverBootstrap = new ServerBootstrap();
-    // todo 扫描范围 放到配置里？
-    String scanPackage = "com.cs.nrpcserver";
+
     public static Map<String, Object> providerServiceBeans = new ConcurrentHashMap<>();
 
     public NRpcServer(ServerInfo serverInfo, ServiceRegistry serviceRegistry) {
@@ -41,12 +40,11 @@ public class NRpcServer {
         this.port = serverInfo.getPort();
     }
 
-    public void start() throws InterruptedException {
+    public void start(String scanPackage) throws InterruptedException {
         registerProviderServiceToMap(scanPackage);
         serverBootstrap.group(bossEventLoopGroup, workerEventLoopGroup)
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new RpcChannelInitializer())
-                .option(ChannelOption.SO_BACKLOG, 1024) // todo client set serializer size 1024
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
 
 
@@ -88,7 +86,7 @@ public class NRpcServer {
             NRpcProvider provider = clazz.getAnnotation(NRpcProvider.class);
             Class<?> interfaceClass = provider.interfaceClass();
             String version = provider.version();
-            String serviceName = ServiceNameUtil.getServiceName(interfaceClass, version);
+            String serviceName = NRpcServiceUtil.getServiceName(interfaceClass, version);
             Object providerBean;
             try {
                 providerBean = clazz.newInstance();
@@ -99,14 +97,14 @@ public class NRpcServer {
         }
     }
 
-    // todo zookeeper 的注册安全？
-    //todo 注册所有被修饰的service
 
     /**
      * 将提供的服务 以及服务对应请求地址注册到 zk 上
      */
     private void registerToZookeeper() {
-        //serviceRegistry.register(CalculateService.class.getName(), serverInfo);
+        for (String serviceName : providerServiceBeans.keySet()) {
+            serviceRegistry.register(serviceName, serverInfo);
+        }
     }
 
 }

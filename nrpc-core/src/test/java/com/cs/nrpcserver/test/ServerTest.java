@@ -15,10 +15,10 @@ public class ServerTest {
         String zkServer = "127.0.0.1:2181";
         ServiceRegistry serviceRegistry = new ServiceRegistry(zkServer);
 
-        ServerInfo serverInfo = new ServerInfo("127.0.0.1",9876);
+        ServerInfo serverInfo = new ServerInfo("127.0.0.1", 9876);
 
         NRpcServer NRpcServer = new NRpcServer(serverInfo, serviceRegistry);
-        NRpcServer.start();
+        NRpcServer.start("com.cs.nrpcserver");
 
     }
 

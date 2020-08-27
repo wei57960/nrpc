@@ -2,7 +2,7 @@ package com.cs.nrpcserver.netty.server;
 
 import com.cs.common.model.NRpcRequest;
 import com.cs.common.model.NRpcResponse;
-import com.cs.common.util.ServiceNameUtil;
+import com.cs.common.util.NRpcServiceUtil;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -21,7 +21,7 @@ public class RpcChannelHandler extends SimpleChannelInboundHandler<NRpcRequest> 
     protected void channelRead0(ChannelHandlerContext ctx, NRpcRequest request) throws Exception {
         log.info("nrpc server received message : [{}]", request);
         Object providerServiceBean = NRpcServer.providerServiceBeans.get(
-                ServiceNameUtil.getServiceName(
+                NRpcServiceUtil.getServiceName(
                         Class.forName(request.getServiceName()), request.getVersion()
                 ));
         if (Objects.isNull(providerServiceBean)) {

@@ -34,7 +34,7 @@ public class ServiceRegistry {
     public void register(String serviceName, ServerInfo serverInfo) {
         String serviceParentPath = RegistryUtil.getServiceParentPath();
         if (!zkClient.exists(serviceParentPath)) {
-            zkClient.createPersistent(serviceParentPath,true);
+            zkClient.createPersistent(serviceParentPath, true);
         }
         String servicePath = RegistryUtil.getRemoteService(serviceName);
         if (!zkClient.exists(servicePath)) {
@@ -47,6 +47,7 @@ public class ServiceRegistry {
         String truePath = zkClient.createEphemeralSequential(serverPath, serverNodeData);
         // data: 顺序节点上的数据
         String data = zkClient.readData(truePath);
+        log.info("zk truePath data [{}]", data);
     }
 
     public void shutdown() {

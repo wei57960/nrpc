@@ -42,7 +42,6 @@ public class DefaultProxy {
 
             RpcClient rpcClient = new RpcClient(host, port);
             // todo how Dubbo requestId generate ?
-            // todo why use timestamp
             NRpcRequest request = NRpcRequest.builder()
                     .requestId(UUID.randomUUID().toString())
                     .serviceName(interfaceClass.getName())
